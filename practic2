@@ -97,3 +97,9 @@ try:
 
 except Exception as error:
     print(error)
+# PS D:\Homework_10_lite> & C:/Users/User/AppData/Local/Programs/Python/Python312/python.exe d:/Homework_10_lite/practic2
+# Данные пользователя корректны.
+# Отсутствует обязательный ключ 'name'.
+# Возраст должен быть числом.
+# Возраст должен быть положительным числом.
+# Ожидался словарь (dict).
