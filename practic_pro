@@ -1,0 +1,168 @@
+# Создаем собственые исключения 
+class UserAlreadyExistsError(Exception):   # Создаем ошибку:Пользователь  найден
+    def __init__(self, username):   # Метод __str__ Определяет текст ошибки.
+        self.username = username
+    def __str__(self):
+
+        return (
+            f"Пользователь "
+            f"'{self.username}' уже существует."
+        )
+# Ошибка: пользователь не найден
+class UserNotFoundError(Exception):
+
+    def __init__(self, username):
+
+        self.username = username
+
+    def __str__(self):
+
+        return (
+            f"Пользователь "
+            f"'{self.username}' не найден."
+        )
+# КЛАСС ПОЛЬЗОВАТЕЛЯ
+# Создаем объект пользователя.
+class User:    
+    def __init__(self, username,email,age):             # Конструктор:
+        self.username = username
+        self.email = email
+        self.age = age 
+    # Красивый вывод объекта
+    def __str__(self):
+
+        return (
+            f"User("
+            f"username='{self.username}', "
+            f"email='{self.email}', "
+            f"age={self.age}"
+            f")"
+        )  
+# МЕНЕДЖЕР ПОЛЬЗОВАТЕЛЕЙ
+# Создает систему хранения пользователей.
+class UserManager:
+    def __init__(self):
+        self.users = {}
+ # Добавление пользователя
+    def add_user(self,user):
+#  Проверяем наличие пользователя
+        if user.username in self.users:       # Если найден:    
+            raise UserAlreadyExistsError(
+                user.username
+            )    
+        # Добавляем
+        self.users[
+            user.username
+        ] = user
+
+        print(
+            f"Пользователь "
+            f"{user.username} добавлен."
+        )
+# Удаление пользователя  
+    def remove_user(self,username):    
+        if username not in self.users:
+
+            raise UserNotFoundError(
+                username
+            )
+
+        del self.users[
+            username
+        ]
+
+        print(
+            f"Пользователь "
+            f"{username} удалён."
+        )
+ # Поиск пользователя
+    def find_user(self, username: str):
+        if username not in self.users:
+
+            raise UserNotFoundError(
+                username
+            )
+
+        return self.users[
+            username
+        ]
+# ОСНОВНАЯ ПРОГРАММА
+manager = UserManager()
+
+
+# Создаем пользователей
+user1 = User(
+    "Alice",
+    "alice@gmail.com",
+    25
+)
+
+user2 = User(
+    "Bob",
+    "bob@gmail.com",
+    30
+)
+
+user3 = User(
+    "Alice",
+    "alice2@gmail.com",
+    22
+)
+# ДОБАВЛЕНИЕ
+print("\nДобавление пользователей:\n")
+
+try:
+
+    manager.add_user(user1)
+
+    manager.add_user(user2)
+
+    manager.add_user(user3)
+
+except UserAlreadyExistsError as error:
+
+    print(error)
+# УДАЛЕНИЕ
+
+print("\nУдаление пользователей:\n")
+
+try:
+
+    manager.remove_user(
+        "Tom"
+    )
+
+except UserNotFoundError as error:
+
+    print(error)
+# ПОИСК
+
+
+print("\nПоиск пользователя:\n")
+
+try:
+
+    user = manager.find_user(
+        "Bob"
+    )
+
+    print(user)
+
+except UserNotFoundError as error:
+
+    print(error)
+# ПОИСК НЕСУЩЕСТВУЮЩЕГО
+
+print("\nПоиск отсутствующего:\n")
+
+try:
+
+    user = manager.find_user(
+        "Mike"
+    )
+
+    print(user)
+
+except UserNotFoundError as error:
+
+    print(error)
