@@ -1,0 +1,99 @@
+# Функция для проверки данных пользователя
+def validate_user_input(data):
+
+    # Проверяем, что входные данные являются словарем
+    if not isinstance(data, dict):
+        raise TypeError(
+            "Ожидался словарь (dict)."
+        )
+
+    # Проверяем наличие ключа 'name'
+    if "name" not in data:
+        raise ValueError(
+            "Отсутствует обязательный ключ 'name'."
+        )
+
+    # Проверяем, что значение name является строкой
+    if not isinstance(data["name"], str):
+        raise ValueError(
+            "Значение 'name' должно быть строкой."
+        )
+
+    # Проверяем наличие ключа 'age'
+    if "age" not in data:
+        raise ValueError(
+            "Отсутствует обязательный ключ 'age'."
+        )
+
+    try:
+        # Пытаемся преобразовать age в число
+        age = float(data["age"])
+
+    except Exception as error:
+
+        # Создаем цепочку исключений
+        raise ValueError(
+            "Возраст должен быть числом."
+        ) from error
+
+    # Проверяем, что возраст положительный
+    if age <= 0:
+        raise ValueError(
+            "Возраст должен быть положительным числом."
+        )
+
+    print("Данные пользователя корректны.")
+# Корректные данные
+try:
+    validate_user_input(
+        {
+            "name": "Alice",
+            "age": 30
+        }
+    )
+
+except Exception as error:
+    print(error)
+
+
+# Отсутствует name
+try:
+    validate_user_input(
+        {
+            "age": 30
+        }
+    )
+
+except Exception as error:
+    print(error)
+# Некорректный возраст
+try:
+    validate_user_input(
+        {
+            "name": "Alice",
+            "age": "abc"
+        }
+    )
+
+except Exception as error:
+    print(error)
+
+# Отрицательное число:
+try:
+    validate_user_input(
+        {
+            "name": "Alice",
+            "age": -5
+        }
+    )
+
+except Exception as error:
+    print(error)
+# Вместо словаря передана строка
+try:
+    validate_user_input(
+        "Alice"
+    )
+
+except Exception as error:
+    print(error)
