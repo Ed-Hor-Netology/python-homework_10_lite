@@ -72,3 +72,6 @@ try:
 except NegativeNumberError as error:
 
     print(error)
+# PS D:\Homework_10_lite> & C:/Users/User/AppData/Local/Programs/Python/Python312/python.exe d:/Homework_10_lite/practic3
+# Число не должно быть отрицательным. Получено число: -10
+# Число 25 является положительным.
