@@ -29,3 +29,12 @@ convert_to_int("123")
 convert_to_int("abc")
 # Список вместо строки
 convert_to_int([1, 2, 3])
+# PS D:\Homework_10_lite> & C:/Users/User/AppData/Local/Programs/Python/Python312/python.exe d:/Homework_10_lite/practic1
+# Преобразование выполнено успешно: 123
+# Попытка преобразования завершена.
+
+# Ошибка: невозможно преобразовать значение в целое число.
+# Попытка преобразования завершена.
+
+# Неожиданная ошибка: int() argument must be a string, a bytes-like object or a real number, not 'list'
+# Попытка преобразования завершена.git commit -m "Добавлено решение упражнения по обработке исключений"
